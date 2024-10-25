@@ -1,0 +1,170 @@
+body{
+    background-color: beige;
+    margin: 10% 12%;
+    font-size: 120%;
+    
+}
+
+div.athlete{
+    border: 1px solid;
+    
+}
+
+span.athlete{
+    font-weight: bold;
+    
+}
+
+@keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+.summary {
+  animation: fade-in 1.5s ease-in forwards;
+}
+
+h2{
+    background-color: #555454;
+    color: white;
+    padding: 2%;
+    text-align: center;
+    border-radius: 30px;
+}
+
+header{
+    text-align: center;
+    h1{
+        color: black;
+        font-size: larger;
+        font-weight: bold;
+    }
+    h1:hover{
+        /*button gets stuck upon mobile view when clicked on */
+        /* can we remove skip to main contnet? */
+        font-weight: bolder;
+    }
+    h2{
+        color: black;
+        background: none;
+        font-size: large;
+    }
+}
+
+footer{
+    /* how to get these to be correctly horizontally alligned */
+    font-style: italic;
+    font-size: small;
+    p{
+        font-weight: bold;
+    }
+    address{
+        font-style: italic;
+    }
+
+}
+
+main p{
+    font-style: italic;
+}
+
+nav{
+    display: grid;
+    text-align: center;
+    ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        margin: 1% 0;
+    }
+
+    a {
+        border: 3px solid #3399CC;
+        background-color: #3399CC;
+        color: white;
+        text-decoration: none;
+        padding: 5px;
+        border-radius: 10px;
+        display: block;
+    }
+    a:hover {
+        background-color: #307fff;
+        font-size: 110%;
+      }
+}
+
+.athlete {
+    /* how to add indents before first name? */
+     /* later: make these scroll down to said names */
+    font-weight: normal; 
+}
+
+#backToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    border: solid 2px black;
+    font-size: 16px;
+    background-color: #555454;
+    color: white;
+    padding: 20px;
+    border-radius: 30px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  #backToTopBtn:hover {
+    background-color: #000000;
+  }
+
+.athlete-div figure{
+    text-align: center;
+    font-weight: bold;
+    grid-row: 1/span 2;
+    
+}  
+
+.athlete-div > .top-right {
+    justify-self: start;
+}
+
+.athlete-div{
+    background-color: #3399CC;
+    border: 2px solid black;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 5% 0;
+    h4{
+        color: white;
+        grid-column-start: 1;
+        grid-column-end: -1;
+        margin: auto;
+        margin-bottom: 10%;
+    }
+    figure img{
+        width: 100%;
+        border-radius: 10px;
+        margin: 10%;
+    }
+    dl{
+        grid-row: 1/span 2;
+        margin: 10px 20%;
+        align-content: space-evenly;
+        dt{
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        dd{
+            margin-left: 8px;
+        }
+    }
+}
