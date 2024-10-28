@@ -200,3 +200,13 @@ nav {
     border-radius: 8px;
     animation: fade-in 1.5s ease-in forwards;
 }
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
