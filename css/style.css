@@ -86,8 +86,9 @@ nav {
         margin: 1% 0;
     }
     a {
-        border: 3px solid #00537c;
-        background-color: #00537c;
+        
+        border: 3px solid #00509e;
+        background-color: #00509e;
         color: white;
         text-decoration: none;
         padding: 5px;
@@ -125,8 +126,8 @@ nav {
 }
 
 .athlete-div {
-    background-color: #00537c;
-    border: 2px solid #00537c;
+    background-color: #00509e;
+    border: 2px solid #00509e;
     border-radius: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -208,5 +209,39 @@ nav {
     *::after {
         animation: none !important;
         transition: none !important;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: more) {
+    body {
+        background-color: black;
+        color: white;
+    }
+    h2,
+    header a,
+    header h2,
+    footer a,
+    nav a,
+    #backToTopBtn,
+    #galleryButton {
+        background-color: white;
+        color: black;
+        border-color: black;
+    }
+    .athlete-div,
+    .athlete-div dl {
+        background-color: white;
+        color: black;
+    }
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+        background-color: black;
+        color: white;
+      }
     }
 }
