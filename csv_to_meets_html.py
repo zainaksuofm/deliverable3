@@ -4,6 +4,7 @@ import os
 def csv_to_html(csv_filename, output_folder):
     # Derive the HTML filename by replacing the CSV extension with '.html' in the meets folder
     html_filename = os.path.join(output_folder, os.path.splitext(os.path.basename(csv_filename))[0] + '.html')
+    meet_title = ""
 
     # try:
     with open(csv_filename, mode='r', newline='', encoding='utf-8') as csvfile:
@@ -21,7 +22,8 @@ def csv_to_html(csv_filename, output_folder):
         link_url = rows[2][0]
         summary_text = rows[3][0]
 
-        # Initialize HTML content
+        meet_title = link_text
+
         html_content = f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +37,6 @@ def csv_to_html(csv_filename, output_folder):
 <script src="https://kit.fontawesome.com/53ae34ec89.js" crossorigin="anonymous"></script>
 </head>
    <body>
-   <a href = "#main">Skip to Main Content</a>
    <nav>
      <ul>
         <li><a href="index.html">Home Page</a></li>
@@ -102,7 +103,7 @@ def csv_to_html(csv_filename, output_folder):
 <figure> 
     <img src="../images/profiles/{profile_pic}" alt="Profile picture of {name}"> 
 </figure>
-    <h4>{name}</h4>
+    <h3>{name}</h3>
 <dl>
     <dt>Place</dt><dd>{place}</dd>
     <dt>Time</dt><dd>{time}</dd>
@@ -113,9 +114,11 @@ def csv_to_html(csv_filename, output_folder):
 
         html_content += """</section>\n
         <section id = "gallery">
-        <h2>Gallery</h2>
-        """
+        <button id="galleryButton" class="dropdown-btn up" onclick="toggleGallery()">Gallery <i class="fa-solid fa-caret-down"></i></button>
+        <div id="galleryContent" style="display: none;">
 
+        """
+        url = "https://www.athletic.net/CrossCountry/meet/235827/results/943367"
         html_content += create_meet_image_gallery(url)
         # Close the HTML document
         html_content += """
@@ -129,12 +132,24 @@ def csv_to_html(csv_filename, output_folder):
                      Ann Arbor, MI 48103<br><br>
                      </address>
 
-                     <a href = "https://sites.google.com/aaps.k12.mi.us/skylinecrosscountry2021/home">XC Skyline Page</a><br>
+                     <a href = "https://sites.google.com/aaps.k12.mi.us/skylinecrosscountry2021/home">XC Skyline Page  <i class="fa-solid fa-arrow-up-right-from-square"></i></a><br>
                     Follow us on Instagram <a href = "https://www.instagram.com/a2skylinexc/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i>  </a> 
 
 
                      </footer>
         </body>
+
+
+    <!-- JavaScript function to toggle the gallery display -->
+    <script>
+    function toggleGallery() {
+        const button = document.getElementById("galleryButton");
+        const galleryContent = document.getElementById("galleryContent");
+        galleryContent.style.display = galleryContent.style.display === "none" ? "grid" : "none";
+        button.classList.toggle("down");
+        button.classList.toggle("up");
+    }
+    </script>
 
     <!-- Scroll to Top Script -->
    <script>
@@ -184,11 +199,45 @@ def process_meet_files():
         print(f"No CSV files found in folder: {meets_folder}")
         return
 
+    # Collect meets information for the index
+    csv_files = [f for f in os.listdir(meets_folder) if f.endswith('.csv')]
+    meet_links = []
+
     # Process each CSV file in the meets folder
     for csv_file in csv_files:
         csv_file_path = os.path.join(meets_folder, csv_file)
-        csv_to_html(csv_file_path, meets_folder)
+        meet_info = csv_to_html(csv_file_path, meets_folder)
 
+        if meet_info:
+            meet_links.append(meet_info)  # Collect (title, filename) tuples
+       # Generate index.html file with links
+
+    create_index_html(meet_links, meets_folder)
+
+def create_index_html(meet_links, output_folder):
+    index_path = os.path.join(output_folder, 'index.html')
+
+    with open(index_path, 'w', encoding='utf-8') as index_file:
+        index_file.write("""
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Meets Index</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+            </head>
+            <body>
+            <nav>
+                <ul>
+            """)
+
+        for title, filename in meet_links:
+            # Create relative links to each meet's HTML file
+            relative_path = os.path.relpath(filename, output_folder)
+            index_file.write(f'<li><a href="{relative_path}">{title}</a></li>')
+
+        index_file.write("</ul></body></html>")
 
 
 
@@ -208,7 +257,7 @@ def extract_meet_id(url):
         raise ValueError("Meet ID not found in URL.")
 
 # Step 2: Select 12 random photos from the folder
-def select_random_photos(folder_path, num_photos=25):
+def select_random_photos(folder_path, num_photos=3):
     # List all files in the folder
     print(f"Checking {folder_path}")
     all_files = os.listdir(folder_path)
