@@ -1,34 +1,31 @@
-body{
+body {
     background-color: beige;
     margin: 10% 12%;
     font-size: 120%;
-    
 }
 
-div.athlete{
+div.athlete {
     border: 1px solid;
-    
 }
 
-span.athlete{
+span.athlete {
     font-weight: bold;
-    
 }
 
 @keyframes fade-in {
     0% {
-      opacity: 0;
+        opacity: 0;
     }
     100% {
-      opacity: 1;
+        opacity: 1;
     }
-  }
-
-.summary {
-  animation: fade-in 1.5s ease-in forwards;
 }
 
-h2{
+.summary {
+    animation: fade-in 1.5s ease-in forwards;
+}
+
+h2 {
     background-color: #555454;
     color: white;
     padding: 2%;
@@ -36,57 +33,61 @@ h2{
     border-radius: 30px;
 }
 
-header{
+header {
     text-align: center;
-    h1{
-        color: black;
-        font-size: larger;
-        font-weight: bold;
+    a {
+        font-size: large;
+        display: block;
+        background-color: #555454;
+        color: white;
+        padding: 10%;
+        text-align: center;
+        border-radius: 30px;
+        text-decoration: none;
     }
-    h1:hover{
-        /*button gets stuck upon mobile view when clicked on */
-        /* can we remove skip to main contnet? */
+    h1:hover {
         font-weight: bolder;
     }
-    h2{
+    h2 {
         color: black;
         background: none;
         font-size: large;
     }
 }
 
-footer{
-    /* how to get these to be correctly horizontally alligned */
+footer {
     font-style: italic;
     font-size: small;
-    p{
+    margin: 10% 0;
+    p {
         font-weight: bold;
     }
-    address{
+    address {
         font-style: italic;
     }
-
+    a {
+        color: black;
+        text-decoration: none;
+    }
 }
 
-main p{
+main p {
     font-style: italic;
 }
 
-nav{
+nav {
     display: grid;
     text-align: center;
     ul {
         padding: 0;
         list-style: none;
     }
-
     li {
         margin: 1% 0;
     }
-
     a {
-        border: 3px solid #3399CC;
-        background-color: #3399CC;
+        border: 3px solid #00537c;
+        background-color: #00537c;
         color: white;
         text-decoration: none;
         padding: 5px;
@@ -96,13 +97,11 @@ nav{
     a:hover {
         background-color: #307fff;
         font-size: 110%;
-      }
+    }
 }
 
 .athlete {
-    /* how to add indents before first name? */
-     /* later: make these scroll down to said names */
-    font-weight: normal; 
+    font-weight: normal;
 }
 
 #backToTopBtn {
@@ -119,52 +118,85 @@ nav{
     border-radius: 30px;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-  }
-  
-  #backToTopBtn:hover {
-    background-color: #000000;
-  }
-
-.athlete-div figure{
-    text-align: center;
-    font-weight: bold;
-    grid-row: 1/span 2;
-    
-}  
-
-.athlete-div > .top-right {
-    justify-self: start;
 }
 
-.athlete-div{
-    background-color: #3399CC;
-    border: 2px solid black;
+#backToTopBtn:hover {
+    background-color: #000000;
+}
+
+.athlete-div {
+    background-color: #00537c;
+    border: 2px solid #00537c;
     border-radius: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 5% 0;
-    h4{
+    h3 {
         color: white;
         grid-column-start: 1;
         grid-column-end: -1;
         margin: auto;
         margin-bottom: 10%;
     }
-    figure img{
-        width: 100%;
-        border-radius: 10px;
-        margin: 10%;
+    figure {
+        text-align: center;
+        font-weight: bold;
+        grid-row: 1/span 2;
+        img {
+            width: 100%;
+            border-radius: 10px;
+            margin: 10%;
+        }
     }
-    dl{
+    dl {
+        color: white;
         grid-row: 1/span 2;
         margin: 10px 20%;
         align-content: space-evenly;
-        dt{
+        dt {
             text-decoration: underline;
             font-weight: bold;
         }
-        dd{
+        dd {
             margin-left: 8px;
         }
     }
+    > .top-right {
+        justify-self: start;
+    }
+}
+
+#galleryButton {
+    background-color: #555454;
+    color: white;
+    padding: 2%;
+    text-align: center;
+    border-radius: 30px;
+    border: none;
+    margin: 5% 0;
+    display: block;
+    width: 100%;
+    font-size: inherit;
+}
+
+#galleryButton.up i::before {
+    content: "\f0d7";
+}
+
+#galleryButton.down i::before {
+    content: "\f0d8";
+}
+
+#galleryContent {
+    display: grid;
+    gap: 15px;
+    justify-items: center;
+    align-items: center;
+}
+
+#gallery img {
+    width: 70%;
+    height: auto;
+    border-radius: 8px;
+    animation: fade-in 1.5s ease-in forwards;
 }
